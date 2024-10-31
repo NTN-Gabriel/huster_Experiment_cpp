@@ -18,6 +18,11 @@ namespace adas
 
     void ExecutorImpl::Execute(const std::string &commands) noexcept
     {
+        // 暂无实现
+    }
+
+    void ExecutorImpl::Execute(const std::string &commands) noexcept
+    {
         for (const auto cmd : commands)
         {
             if (cmd == 'M')
@@ -41,3 +46,4 @@ namespace adas
             }
         }
     }
+}
