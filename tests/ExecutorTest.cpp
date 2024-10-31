@@ -111,4 +111,48 @@ namespace adas
         const Pose target({0, 0, 'E'});
         ASSERT_EQ(target, executor->Query());
     }
+
+    TEST(ExecutorTest, should_return_facing_S_given_command_is_R_and_facing_is_E)
+    {
+        // given给定一个executor
+        std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'E'})); // 给了初始姿势，当前朝向是E，起点（0，0）
+                                                                                // when调用executor的Execute方法去执行R指令
+        executor->Execute("R");
+
+        const Pose target({0, 0, 'S'}); // 如果执行R指令正确，新的姿势应该是target：{0，0，'S'}
+        ASSERT_EQ(target, executor->Query());
+    }
+
+    TEST(ExecutorTest, should_return_facing_W_given_command_is_R_and_facing_is_S)
+    {
+        // given给定一个executor
+        std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'S'}));
+
+        executor->Execute("R");
+
+        const Pose target({0, 0, 'W'});
+        ASSERT_EQ(target, executor->Query());
+    }
+
+    TEST(ExecutorTest, should_return_facing_N_given_command_is_R_and_facing_is_W)
+    {
+        // given给定一个executor
+        std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'W'}));
+
+        executor->Execute("R");
+
+        const Pose target({0, 0, 'N'});
+        ASSERT_EQ(target, executor->Query());
+    }
+
+    TEST(ExecutorTest, should_return_facing_E_given_command_is_R_and_facing_is_N)
+    {
+        // given给定一个executor
+        std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'N'}));
+
+        executor->Execute("R");
+
+        const Pose target({0, 0, 'E'});
+        ASSERT_EQ(target, executor->Query());
+    }
 }
