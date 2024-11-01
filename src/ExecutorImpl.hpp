@@ -48,6 +48,16 @@ namespace adas
                 executor.Move();
             }
         };
+
+        class TurnLeftCommand final
+        {
+        public:
+            // 执行TurnLeft动作，需要委托ExecutorImp&执行器来完成动作
+            void DoOperate(ExecutorImpl &executor) const noexcept
+            {
+                executor.TurnLeft();
+            }
+        };
     };
 
 }

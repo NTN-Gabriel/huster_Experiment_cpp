@@ -32,7 +32,10 @@ namespace adas
 
             if (cmd == 'L')
             { // 如果是L指令
-                TurnLeft();
+                // 智能指针指向TurnLeftCommand实例，不用担心delete了
+                std::unique_ptr<TurnLeftCommand> cmder = std::make_unique<TurnLeftCommand>();
+                //*this就是ExecutorImpl实例对象，作为实参传递给DoOperate方法
+                cmder->DoOperate(*this); // 执行TurnLeftCommand的DoOperate，即TurnLeft
             }
 
             if (cmd == 'R')
