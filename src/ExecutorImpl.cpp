@@ -32,28 +32,7 @@ namespace adas
 
             if (cmd == 'R')
             { // 如果是R指令
-                if (!isFast)
-                {
-                    if (pose.heading == 'E')
-                    {
-                        pose.heading = 'S';
-                    }
-                    else if (pose.heading == 'W')
-                    {
-                        pose.heading = 'N';
-                    }
-                    else if (pose.heading == 'N')
-                    {
-                        pose.heading = 'E';
-                    }
-                    else if (pose.heading == 'S')
-                    {
-                        pose.heading = 'W';
-                    }
-                }
-                else
-                {
-                }
+                TurnRight();
             }
 
             else if (cmd == 'F')
@@ -100,6 +79,26 @@ namespace adas
         else if (pose.heading == 'S')
         {
             pose.heading = 'E';
+        }
+    }
+
+    void ExecutorImpl::TurnRight() noexcept
+    {
+        if (pose.heading == 'E')
+        {
+            pose.heading = 'S';
+        }
+        else if (pose.heading == 'W')
+        {
+            pose.heading = 'N';
+        }
+        else if (pose.heading == 'N')
+        {
+            pose.heading = 'E';
+        }
+        else if (pose.heading == 'S')
+        {
+            pose.heading = 'W';
         }
     }
 }
