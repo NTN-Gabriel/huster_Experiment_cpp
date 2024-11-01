@@ -39,31 +39,35 @@ namespace adas
         void TurnRight(void) noexcept;
 
     private:
-        class MoveCommand final
+        class ICommand
         {
         public:
-            // 执行Move动作，需要委托ExecutorImp&执行器来完成动作
-            void DoOperate(ExecutorImpl &executor) const noexcept
+            virtual ~ICommand() = default;
+            virtual void DoOperate(ExecutorImpl &ExecutorImpl) const noexcept = 0;
+        };
+
+        class MoveCommand final : public ICommand
+        {
+        public:
+            void DoOperate(ExecutorImpl &executor) const noexcept override
             {
                 executor.Move();
             }
         };
 
-        class TurnLeftCommand final
+        class TurnLeftCommand final : public ICommand
         {
         public:
-            // 执行TurnLeft动作，需要委托ExecutorImp&执行器来完成动作
-            void DoOperate(ExecutorImpl &executor) const noexcept
+            void DoOperate(ExecutorImpl &executor) const noexcept override
             {
                 executor.TurnLeft();
             }
         };
 
-        class TurnRightCommand final
+        class TurnRightCommand final : public ICommand
         {
         public:
-            // 执行TurnRight动作，需要委托ExecutorImp&执行器来完成动作
-            void DoOperate(ExecutorImpl &executor) const noexcept
+            void DoOperate(ExecutorImpl &executor) const noexcept override
             {
                 executor.TurnRight();
             }
