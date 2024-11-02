@@ -4,7 +4,7 @@
 
 namespace adas
 {
-    TEST(ExecutorTest, should_return_x_plus_2_given_status_is_fast_command_is_M_and_facing_is_E)
+    TEST(ExecutorFastTest, should_return_x_plus_2_given_status_is_fast_command_is_M_and_facing_is_E)
     {
         std::unique_ptr<Executor> executor(Executor::NewExecutor({0, 0, 'E'}));
         executor->Execute("FM");
