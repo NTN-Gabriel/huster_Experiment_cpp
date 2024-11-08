@@ -7,11 +7,11 @@
 
 namespace adas
 {
-    ExecutorImpl::ExecutorImpl(const Pose &pose) noexcept : pose(pose), isFast(false) {}
+    ExecutorImpl::ExecutorImpl(const Pose &pose) noexcept : poseHandler(pose) {}
 
-    Pose ExecutorImpl::Query(void) const noexcept
+    Pose ExecutorImpl::Query() const noexcept
     {
-        return pose;
+        return poseHandler.Query();
     }
 
     Executor *Executor::NewExecutor(const Pose &pose) noexcept
@@ -47,81 +47,8 @@ namespace adas
 
             if (cmder)
             {
-                cmder->DoOperate(*this);
+                cmder->DoOperate(poseHandler);
             }
         }
-    }
-
-    void ExecutorImpl::Move() noexcept
-    {
-        if (pose.heading == 'E')
-        {
-            ++pose.x;
-        }
-        else if (pose.heading == 'W')
-        {
-            --pose.x;
-        }
-        else if (pose.heading == 'N')
-        {
-            ++pose.y;
-        }
-        else if (pose.heading == 'S')
-        {
-            --pose.y;
-        }
-    }
-
-    void ExecutorImpl::TurnLeft() noexcept
-    {
-        if (pose.heading == 'E')
-        {
-            pose.heading = 'N';
-        }
-        else if (pose.heading == 'W')
-        {
-            pose.heading = 'S';
-        }
-        else if (pose.heading == 'N')
-        {
-            pose.heading = 'W';
-        }
-        else if (pose.heading == 'S')
-        {
-            pose.heading = 'E';
-        }
-    }
-
-    void ExecutorImpl::TurnRight() noexcept
-    {
-        if (pose.heading == 'E')
-        {
-            pose.heading = 'S';
-        }
-        else if (pose.heading == 'W')
-        {
-            pose.heading = 'N';
-        }
-        else if (pose.heading == 'N')
-        {
-            pose.heading = 'E';
-        }
-        else if (pose.heading == 'S')
-        {
-            pose.heading = 'W';
-        }
-    }
-
-    void ExecutorImpl::Fast() noexcept
-    {
-        isFast = !isFast;
-    }
-
-    bool ExecutorImpl::IsFast() const noexcept
-    {
-        if (isFast)
-            return true;
-        else
-            return false;
     }
 }

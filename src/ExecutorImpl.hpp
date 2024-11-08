@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Executor.hpp"
+#include "PoseHandler.hpp"
 #include <string>
 
 namespace adas
@@ -28,18 +29,7 @@ namespace adas
         void Execute(const std::string &commands) noexcept override;
 
     private:
-        // 私有数据成员，汽车当前姿态
-        Pose pose;
-        bool fast{false}; // 记录是否处于加速状态
-        // 是否处于加速状态，默认是false
-        bool isFast;
-
-    public:
-        void Move(void) noexcept;
-        void TurnLeft(void) noexcept;
-        void TurnRight(void) noexcept;
-        void Fast(void) noexcept;
-        bool IsFast(void) const noexcept;
+        PoseHandler poseHandler; // 状态管理类
     };
 
 }
