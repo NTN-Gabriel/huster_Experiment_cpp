@@ -26,17 +26,13 @@ namespace adas
         // 表驱动
         std::unordered_map<char, std::function<void(PoseHandler & PoseHandler)>> cmderMap;
         // 前进
-        MoveCommand moveCommand;
-        cmderMap.emplace('M', moveCommand.operate);
+        cmderMap.emplace('M', MoveCommand());
         // 左转
-        TurnLeftCommand turnLeftCommand;
-        cmderMap.emplace('L', turnLeftCommand.operate);
+        cmderMap.emplace('L', TurnLeftCommand());
         // 右转
-        TurnRightCommand turnRightCommand;
-        cmderMap.emplace('R', turnRightCommand.operate);
+        cmderMap.emplace('R', TurnRightCommand());
         // 快速
-        FastCommand fastCommand;
-        cmderMap.emplace('F', fastCommand.operate);
+        cmderMap.emplace('F', FastCommand());
 
         for (const auto cmd : commands)
         {

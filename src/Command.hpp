@@ -22,14 +22,24 @@ namespace adas
         //         poseHandler.Move();
         //     poseHandler.Move();
         // }
-        const std ::function<void(PoseHandler &PoseHandler)> operate = [](PoseHandler &poseHandler) noexcept
+
+        // const std ::function<void(PoseHandler &PoseHandler)> operate = [](PoseHandler &poseHandler) noexcept
+        // {
+        //     if (poseHandler.IsFast())
+        //     {
+        //         poseHandler.Move();
+        //     }
+        //     poseHandler.Move();
+        // };
+
+        void operator()(PoseHandler &poseHandler) const noexcept
         {
             if (poseHandler.IsFast())
             {
                 poseHandler.Move();
             }
             poseHandler.Move();
-        };
+        }
     };
 
     class TurnLeftCommand final //: public ICommand
@@ -41,14 +51,24 @@ namespace adas
         //         poseHandler.Move();
         //     poseHandler.TurnLeft();
         // }
-        const std ::function<void(PoseHandler &PoseHandler)> operate = [](PoseHandler &poseHandler) noexcept
+
+        // const std ::function<void(PoseHandler &PoseHandler)> operate = [](PoseHandler &poseHandler) noexcept
+        // {
+        //     if (poseHandler.IsFast())
+        //     {
+        //         poseHandler.Move();
+        //     }
+        //     poseHandler.TurnLeft();
+        // };
+
+        void operator()(PoseHandler &poseHandler) const noexcept
         {
             if (poseHandler.IsFast())
             {
                 poseHandler.Move();
             }
             poseHandler.TurnLeft();
-        };
+        }
     };
 
     class TurnRightCommand final //: public ICommand
@@ -60,14 +80,24 @@ namespace adas
         //         poseHandler.Move();
         //     poseHandler.TurnRight();
         // }
-        const std ::function<void(PoseHandler &PoseHandler)> operate = [](PoseHandler &poseHandler) noexcept
+
+        // const std ::function<void(PoseHandler &PoseHandler)> operate = [](PoseHandler &poseHandler) noexcept
+        // {
+        //     if (poseHandler.IsFast())
+        //     {
+        //         poseHandler.Move();
+        //     }
+        //     poseHandler.TurnRight();
+        // };
+
+        void operator()(PoseHandler &poseHandler) const noexcept
         {
             if (poseHandler.IsFast())
             {
                 poseHandler.Move();
             }
             poseHandler.TurnRight();
-        };
+        }
     };
 
     class FastCommand final //: public ICommand
@@ -78,10 +108,17 @@ namespace adas
         //     poseHandler.Fast();
         //     poseHandler.IsFast();
         // }
-        const std ::function<void(PoseHandler &PoseHandler)> operate = [](PoseHandler &poseHandler) noexcept
+
+        // const std ::function<void(PoseHandler &PoseHandler)> operate = [](PoseHandler &poseHandler) noexcept
+        // {
+        //     poseHandler.Fast();
+        //     poseHandler.IsFast();
+        // };
+
+        void operator()(PoseHandler &poseHandler) const noexcept
         {
             poseHandler.Fast();
             poseHandler.IsFast();
-        };
+        }
     };
 } // namespace adas
