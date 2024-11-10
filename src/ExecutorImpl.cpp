@@ -29,6 +29,7 @@ namespace adas
             {'L', TurnLeftCommand()},  // 左转
             {'R', TurnRightCommand()}, // 右转
             {'F', FastCommand()},      // 快速
+            {'B', ReverseCommand()},   // 后退
         };
         // // 前进
         // cmderMap.emplace('M', MoveCommand());

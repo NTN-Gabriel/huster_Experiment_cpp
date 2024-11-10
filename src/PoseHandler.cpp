@@ -3,9 +3,15 @@
 namespace adas
 {
     PoseHandler::PoseHandler(const Pose &pose) noexcept : point(pose.x, pose.y), facing(&Direction::GetDirection(pose.heading)) {}
-    void PoseHandler::Move() noexcept
+
+    void PoseHandler::Forward() noexcept
     {
         point += facing->Move();
+    }
+
+    void PoseHandler::Backward() noexcept
+    {
+        point -= facing->Move();
     }
 
     void PoseHandler::TurnLeft() noexcept
@@ -22,10 +28,21 @@ namespace adas
     {
         fast = !fast;
     }
+    void PoseHandler::Reverse() noexcept
+    {
+        reverse = !reverse;
+    }
 
     bool PoseHandler::IsFast() const noexcept
     {
         if (fast)
+            return true;
+        else
+            return false;
+    }
+    bool PoseHandler::IsReverse() const noexcept
+    {
+        if (reverse)
             return true;
         else
             return false;
