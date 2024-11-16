@@ -4,173 +4,86 @@
 
 #include <functional>
 
+#include "ActionGroup.hpp"
+
 namespace adas
 {
-    // class ICommand
-    // {
-    // public:
-    //     virtual ~ICommand() = default;
-    //     virtual void DoOperate(PoseHandler &poseHandler) const noexcept = 0;
-    // };
 
     class MoveCommand final // : public ICommand
     {
     public:
-        // void DoOperate(PoseHandler &poseHandler) const noexcept override
-        // {
-        //     if (poseHandler.IsFast())
-        //         poseHandler.Move();
-        //     poseHandler.Move();
-        // }
-
-        // const std ::function<void(PoseHandler &PoseHandler)> operate = [](PoseHandler &poseHandler) noexcept
-        // {
-        //     if (poseHandler.IsFast())
-        //     {
-        //         poseHandler.Move();
-        //     }
-        //     poseHandler.Move();
-        // };
-
-        void operator()(PoseHandler &poseHandler) const noexcept
+        ActionGroup operator()(PoseHandler &poseHandler) const noexcept
         {
+            ActionGroup actionGroup;
+            const auto action = poseHandler.IsReverse() ? ActionType::BACKWARD_1_STEP_ACTION : ActionType::FORWARD_1_STEP_ACTION;
             if (poseHandler.IsFast())
             {
-                if (poseHandler.IsReverse())
-                {
-                    poseHandler.Backward();
-                }
-                else
-                {
-                    poseHandler.Forward();
-                }
+                actionGroup.PushAction(action);
             }
-            if (poseHandler.IsReverse())
-            {
-                poseHandler.Backward();
-            }
-            else
-            {
-                poseHandler.Forward();
-            }
+            actionGroup.PushAction(action);
+            return actionGroup;
         }
     };
 
     class TurnLeftCommand final //: public ICommand
     {
     public:
-        // void DoOperate(PoseHandler &poseHandler) const noexcept override
-        // {
-        //     if (poseHandler.IsFast())
-        //         poseHandler.Move();
-        //     poseHandler.TurnLeft();
-        // }
-
-        // const std ::function<void(PoseHandler &PoseHandler)> operate = [](PoseHandler &poseHandler) noexcept
-        // {
-        //     if (poseHandler.IsFast())
-        //     {
-        //         poseHandler.Move();
-        //     }
-        //     poseHandler.TurnLeft();
-        // };
-
-        void operator()(PoseHandler &poseHandler) const noexcept
+        ActionGroup operator()(PoseHandler &poseHandler) const noexcept
         {
+            ActionGroup actionGroup;
+
+            const auto action2 = poseHandler.IsReverse() ? ActionType::REVERSE_TURNLEFT_ACTION : ActionType::TURNLEFT_ACTION;
+
             if (poseHandler.IsFast())
             {
-                if (poseHandler.IsReverse())
-                {
-                    poseHandler.Backward();
-                }
-                else
-                {
-                    poseHandler.Forward();
-                }
+                const auto action1 = poseHandler.IsReverse() ? ActionType::BACKWARD_1_STEP_ACTION : ActionType::FORWARD_1_STEP_ACTION;
+                actionGroup.PushAction(action1);
             }
-            if (poseHandler.IsReverse())
-            {
-                poseHandler.TurnRight();
-            }
-            else
-            {
-                poseHandler.TurnLeft();
-            }
+            actionGroup.PushAction(action2);
+            return actionGroup;
         }
     };
 
     class TurnRightCommand final //: public ICommand
     {
     public:
-        // void DoOperate(PoseHandler &poseHandler) const noexcept override
-        // {
-        //     if (poseHandler.IsFast())
-        //         poseHandler.Move();
-        //     poseHandler.TurnRight();
-        // }
-
-        // const std ::function<void(PoseHandler &PoseHandler)> operate = [](PoseHandler &poseHandler) noexcept
-        // {
-        //     if (poseHandler.IsFast())
-        //     {
-        //         poseHandler.Move();
-        //     }
-        //     poseHandler.TurnRight();
-        // };
-
-        void operator()(PoseHandler &poseHandler) const noexcept
+        ActionGroup operator()(PoseHandler &poseHandler) const noexcept
         {
+            ActionGroup actionGroup;
+
+            const auto action2 = poseHandler.IsReverse() ? ActionType::REVERSE_TURNRIGHT_ACTION : ActionType::TURNRIGHT_ACTION;
+
             if (poseHandler.IsFast())
             {
-                if (poseHandler.IsReverse())
-                {
-                    poseHandler.Backward();
-                }
-                else
-                {
-                    poseHandler.Forward();
-                }
+                const auto action1 = poseHandler.IsReverse() ? ActionType::BACKWARD_1_STEP_ACTION : ActionType::FORWARD_1_STEP_ACTION;
+                actionGroup.PushAction(action1);
             }
-            if (poseHandler.IsReverse())
-            {
-                poseHandler.TurnLeft();
-            }
-            else
-            {
-                poseHandler.TurnRight();
-            }
+            actionGroup.PushAction(action2);
+            return actionGroup;
         }
     };
 
     class FastCommand final //: public ICommand
     {
     public:
-        // void DoOperate(PoseHandler &poseHandler) const noexcept override
-        // {
-        //     poseHandler.Fast();
-        //     poseHandler.IsFast();
-        // }
-
-        // const std ::function<void(PoseHandler &PoseHandler)> operate = [](PoseHandler &poseHandler) noexcept
-        // {
-        //     poseHandler.Fast();
-        //     poseHandler.IsFast();
-        // };
-
-        void operator()(PoseHandler &poseHandler) const noexcept
+        ActionGroup operator()(PoseHandler &poseHandler) const noexcept
         {
-            poseHandler.Fast();
-            poseHandler.IsFast();
+            ActionGroup actionGroup;
+            auto const action = ActionType::BE_FAST_ACTION;
+            actionGroup.PushAction(action);
+            return actionGroup;
         }
     };
 
     class ReverseCommand final //: public ICommand
     {
     public:
-        void operator()(PoseHandler &posehandler) const noexcept
+        ActionGroup operator()(PoseHandler &poseHandler) const noexcept
         {
-            posehandler.Reverse();
-            posehandler.IsReverse();
+            ActionGroup actionGroup;
+            auto const action = ActionType::BE_REVERSE_ACTION;
+            actionGroup.PushAction(action);
+            return actionGroup;
         }
     };
 

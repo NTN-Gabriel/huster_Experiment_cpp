@@ -16,7 +16,7 @@ namespace adas
 {
     ExecutorImpl::ExecutorImpl(const Pose &pose) noexcept : poseHandler(pose) {}
 
-    Pose ExecutorImpl::Query() const noexcept
+    Pose ExecutorImpl::Query(void) const noexcept
     {
         return poseHandler.Query();
     }
@@ -36,7 +36,7 @@ namespace adas
             cmders.end(),
             [this](const Cmder &cmder) noexcept
             {
-                cmder(poseHandler);
+                cmder(poseHandler).DoOperate(poseHandler);
             });
 
         // // 表驱动
