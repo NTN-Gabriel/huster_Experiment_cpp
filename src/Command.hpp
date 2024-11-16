@@ -87,4 +87,36 @@ namespace adas
         }
     };
 
+    class TurnRoundCommand final //: public ICommand
+    {
+    public:
+        ActionGroup operator()(PoseHandler &poseHandler) const noexcept
+        {
+            if (poseHandler.IsReverse())
+            {
+                return ActionGroup();
+            }
+            else
+            {
+                if (poseHandler.IsFast())
+                {
+                    return ActionGroup({
+                        ActionType::FORWARD_1_STEP_ACTION,
+                        ActionType::TURNLEFT_ACTION,
+                        ActionType::FORWARD_1_STEP_ACTION,
+                        ActionType::TURNLEFT_ACTION,
+                    });
+                }
+                else
+                {
+                    return ActionGroup({
+                        ActionType::TURNLEFT_ACTION,
+                        ActionType::FORWARD_1_STEP_ACTION,
+                        ActionType::TURNLEFT_ACTION,
+                    });
+                }
+            }
+        }
+    };
+
 } // namespace adas
