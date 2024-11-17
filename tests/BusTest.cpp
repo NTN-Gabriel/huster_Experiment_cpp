@@ -4,7 +4,7 @@
 
 namespace adas
 {
-    class SportsCarTest : public ::testing::Test
+    class BusTest : public ::testing::Test
     {
     protected:
         void SetUp() override
@@ -19,7 +19,7 @@ namespace adas
     };
 
     //  测试输入：M
-    TEST_F(SportsCarTest, should_return_x_plus_1_given_command_is_M_and_facing_is_E)
+    TEST_F(BusTest, should_return_x_plus_1_given_command_is_M_and_facing_is_E)
     {
         // given
 
@@ -32,7 +32,7 @@ namespace adas
     }
 
     //  测试输入：BM
-    TEST_F(SportsCarTest, should_return_x_minus_1_given_command_is_BM_and_facing_is_E)
+    TEST_F(BusTest, should_return_x_minus_1_given_command_is_BM_and_facing_is_E)
     {
         // given
 
@@ -45,7 +45,7 @@ namespace adas
     }
 
     //  测试输入：FM
-    TEST_F(SportsCarTest, should_return_x_plus_2_given_command_is_FM_and_facing_is_E)
+    TEST_F(BusTest, should_return_x_plus_2_given_command_is_FM_and_facing_is_E)
     {
         // given
 
@@ -58,7 +58,7 @@ namespace adas
     }
 
     //  测试输入：FBM
-    TEST_F(SportsCarTest, should_return_x_minus_2_given_command_is_FBM_and_facing_is_E)
+    TEST_F(BusTest, should_return_x_minus_2_given_command_is_FBM_and_facing_is_E)
     {
         // given
 
@@ -71,7 +71,7 @@ namespace adas
     }
 
     //  测试输入：L
-    TEST_F(SportsCarTest, should_return_x_plus_1_and_facing_N_given_command_is_L_and_facing_is_E)
+    TEST_F(BusTest, should_return_x_plus_1_and_facing_N_given_command_is_L_and_facing_is_E)
     {
         // given
 
@@ -83,7 +83,7 @@ namespace adas
         ASSERT_EQ(target, executor->Query());
     }
     //  测试输入：BL
-    TEST_F(SportsCarTest, should_return_x_minus_1_and_facing_S_given_command_is_BL_and_facing_is_E)
+    TEST_F(BusTest, should_return_x_minus_1_and_facing_S_given_command_is_BL_and_facing_is_E)
     {
         // given
 
@@ -96,7 +96,7 @@ namespace adas
     }
 
     //  测试输入：FL
-    TEST_F(SportsCarTest, should_return_x_plus_2_facing_N_given_command_is_FL_and_facing_is_E)
+    TEST_F(BusTest, should_return_x_plus_2_facing_N_given_command_is_FL_and_facing_is_E)
     {
         // given
 
@@ -109,7 +109,7 @@ namespace adas
     }
 
     //  测试输入：FBL
-    TEST_F(SportsCarTest, should_return_x_minus_2_facing_S_given_command_is_FBL_and_facing_is_E)
+    TEST_F(BusTest, should_return_x_minus_2_facing_S_given_command_is_FBL_and_facing_is_E)
     {
         // given
 
@@ -122,7 +122,7 @@ namespace adas
     }
 
     //  测试输入：R
-    TEST_F(SportsCarTest, should_return_x_plus_1_and_facing_S_given_command_is_R_and_facing_is_E)
+    TEST_F(BusTest, should_return_x_plus_1_and_facing_S_given_command_is_R_and_facing_is_E)
     {
         // given
 
@@ -135,7 +135,7 @@ namespace adas
     }
 
     //  测试输入：BR
-    TEST_F(SportsCarTest, should_return_x_minus_1_and_facing_N_given_command_is_BR_and_facing_is_E)
+    TEST_F(BusTest, should_return_x_minus_1_and_facing_N_given_command_is_BR_and_facing_is_E)
     {
         // given
 
@@ -148,7 +148,7 @@ namespace adas
     }
 
     //  测试输入：FR
-    TEST_F(SportsCarTest, should_return_x_plus_2_and_facing_S_given_command_is_FR_and_facing_is_E)
+    TEST_F(BusTest, should_return_x_plus_2_and_facing_S_given_command_is_FR_and_facing_is_E)
     {
         // given
 
@@ -161,7 +161,7 @@ namespace adas
     }
 
     //  测试输入：FBR
-    TEST_F(SportsCarTest, should_return_x_minus_2_facing_N_given_command_is_FBR_and_facing_is_E)
+    TEST_F(BusTest, should_return_x_minus_2_facing_N_given_command_is_FBR_and_facing_is_E)
     {
         // given
 

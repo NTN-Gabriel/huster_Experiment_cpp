@@ -101,4 +101,10 @@ namespace adas
         std::for_each(actions.begin(), actions.end(), [&poseHandler](const ActionType ActionType) mutable noexcept
                       { actionVec[static_cast<uint16_t>(ActionType)](poseHandler); });
     }
+
+    ActionGroup &ActionGroup::operator+=(const ActionGroup &rhs) noexcept
+    {
+        actions.insert(actions.end(), rhs.actions.begin(), rhs.actions.end());
+        return *this;
+    };
 }

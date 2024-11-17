@@ -1,12 +1,8 @@
 #include "ExecutorImpl.hpp"
-// #include "Command.hpp"
 
-// #include <unordered_map>
-
-// #include <new>
-
-// #include <memory>
-
+#include "cmder\BusOrchestrator.hpp"
+#include "cmder\NormalOrchestrator.hpp"
+#include "cmder\SportsCarOrchestrator.hpp"
 #include "cmder\CmderFactory.hpp"
 #include "core\Singleton.hpp"
 
@@ -14,17 +10,40 @@
 
 namespace adas
 {
-    ExecutorImpl::ExecutorImpl(const Pose &pose) noexcept : poseHandler(pose) {}
+    // ExecutorImpl::ExecutorImpl(const Pose &pose) noexcept : poseHandler(pose) {}
 
     Pose ExecutorImpl::Query(void) const noexcept
     {
         return poseHandler.Query();
     }
 
-    Executor *Executor::NewExecutor(const Pose &pose) noexcept
+    Executor *Executor::NewExecutor(const Pose &pose, const ExecutorType executorType) noexcept
     {
-        return new (std::nothrow) ExecutorImpl(pose);
+        CmderOrchestrator *orchestrator = nullptr;
+        switch (executorType)
+        {
+        case ExecutorType::NORMAL:
+        {
+            orchestrator = new (std::nothrow) NormalOrchestrator();
+            break;
+        }
+
+        case ExecutorType::SPORTS_CAR:
+        {
+            orchestrator = new (std::nothrow) SportsCarOrchestrator();
+            break;
+        }
+
+        case ExecutorType::BUS:
+        {
+            orchestrator = new (std::nothrow) BusOrchestrator();
+            break;
+        }
+        }
+        return new (std::nothrow) ExecutorImpl(pose, orchestrator);
     }
+
+    ExecutorImpl::ExecutorImpl(const Pose &pose, CmderOrchestrator *orchestrator) noexcept : poseHandler(pose), orchestrator(orchestrator) {}
 
     void ExecutorImpl::Execute(const std::string &commands) noexcept
     {
@@ -36,35 +55,7 @@ namespace adas
             cmders.end(),
             [this](const Cmder &cmder) noexcept
             {
-                cmder(poseHandler).DoOperate(poseHandler);
+                cmder(poseHandler, *orchestrator).DoOperate(poseHandler);
             });
-
-        // // 表驱动
-        // std::unordered_map<char, std::function<void(PoseHandler & PoseHandler)>> cmderMap{
-        //     {'M', MoveCommand()},      // 前进
-        //     {'L', TurnLeftCommand()},  // 左转
-        //     {'R', TurnRightCommand()}, // 右转
-        //     {'F', FastCommand()},      // 快速
-        //     {'B', ReverseCommand()},   // 后退
-        // };
-        // // // 前进
-        // // cmderMap.emplace('M', MoveCommand());
-        // // // 左转
-        // // cmderMap.emplace('L', TurnLeftCommand());
-        // // // 右转
-        // // cmderMap.emplace('R', TurnRightCommand());
-        // // // 快速
-        // // cmderMap.emplace('F', FastCommand());
-
-        // for (const auto cmd : commands)
-        // {
-        //     // 根据操作查找表驱动
-        //     const auto it = cmderMap.find(cmd);
-        //     // 如果找到表驱动，执行操作对应的指令
-        //     if (it != cmderMap.end())
-        //     {
-        //         it->second(poseHandler);
-        //     }
-        // }
     }
 }
